@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
     <title>Account Setup</title>
-    
-    
-    
-    
-        <script src="http://localhost:3000/dist/links.bundle.js"
-          integrity="sha256-iWs+mRukz1UwjYvBCf1QJRVYfHU9MrsbMn5kDADsMnU="
+    <% var bundlesPath = htmlWebpackPlugin.options.bundlesPath; %>
+    <% var bundlesOrigin = htmlWebpackPlugin.options.bundlesOrigin; %>
+    <% var linksBundle = htmlWebpackPlugin.options.linksBundle; %>
+    <% if (linksBundle) { %>
+        <script src="<%= bundlesOrigin %>/<%= bundlesPath %>/<%= linksBundle %>"
+          integrity="<%= compilation.assets[linksBundle].integrity %>"
           crossorigin="anonymous"
         ></script>
-    
+    <% } %>
 </head>
 
 <body>
@@ -115,28 +115,15 @@
       </div>
     </footer>
 	</div> <!-- end account setup -->
-    
-        
-        
-        
-            <script src="http://localhost:3000/dist/md5.bundle.js"
-              integrity="sha256-34CzT25eJDzkB6OKiEVTycuGUTvk2Eg33p1Nwx6LXhc="
+    <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+        <% var src = htmlWebpackPlugin.files.chunks[chunk].entry; %>
+        <% src = src.substring(bundlesPath.length + 1); %>
+        <% if (src !== linksBundle) { %>
+            <script src="<%= bundlesOrigin %>/<%= bundlesPath %>/<%= src %>"
+              integrity="<%= compilation.assets[src].integrity %>"
               crossorigin="anonymous"
             ></script>
-        
-    
-        
-        
-        
-    
-        
-        
-        
-            <script src="http://localhost:3000/dist/app.bundle.js"
-              integrity="sha256-A5XpGc03kEtp9jhZlwBiAqtpskeG8KGIgDQLPFh0ky4="
-              crossorigin="anonymous"
-            ></script>
-        
-    
+        <% } %>
+    <% } %>
 </body>
 </html>

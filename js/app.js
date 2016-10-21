@@ -49,6 +49,36 @@ var init = function() {
       checkExists();
     }
   });
+  document.querySelector(".account").addEventListener("input", function() {
+    validateAccount();
+  });
+  document.querySelector("#inputFileToLoad").addEventListener("change", function() {
+    loadImageFileAsURL();
+  });
+  document.querySelector("#fileClick").addEventListener("click", function() {
+    clickFileInput();
+  });
+  document.querySelector("#pictureRemove").addEventListener("click", function() {
+    removePicture();
+  });
+  document.querySelector(".createacc").addEventListener("click", function() {
+    createAccount();
+  });
+  document.querySelector(".check").addEventListener("click", function() {
+    checkExists();
+  });
+  document.querySelector(".update").addEventListener("click", function() {
+    updateProfile();
+  });
+  document.querySelector(".issue").addEventListener("click", function() {
+    genCert();
+  });
+  document.querySelector(".return").addEventListener("click", function() {
+    returnToApp();
+  });
+  document.querySelector(".done").addEventListener("click", function() {
+    showAccount();
+  });
 
   document.querySelector(".schema").innerHTML = accURL.schema;
   document.querySelector(".domain").innerHTML = accURL.host;
